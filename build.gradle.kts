@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.eldoria.clirunner"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -16,10 +16,6 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc", "spigot-api", "1.13.2-R0.1-SNAPSHOT")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
 }
 
 java {

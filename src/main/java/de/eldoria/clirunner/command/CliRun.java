@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 public class CliRun implements TabExecutor {
     private final Plugin plugin;
     private final File log;
+    private static final String[] DISALLOWED_ARGS = {"&&", "&", "||", ";", ","};
+    private static final String[] DISALLOWED_CHARACTER = {";"};
 
     public CliRun(Plugin plugin) {
         this.plugin = plugin;
@@ -47,7 +49,21 @@ public class CliRun implements TabExecutor {
         commands.add(shell);
         commands.add(file);
         if (allowArgs && args.length > 1) {
-            commands.addAll(Arrays.stream(Arrays.copyOfRange(args,1, args.length)).toList());
+            commands.addAll(Arrays.stream(Arrays.copyOfRange(args, 1, args.length)).toList());
+        }
+
+        for (var arg : DISALLOWED_ARGS) {
+            if (commands.stream().anyMatch(arg::equals)) {
+                sender.sendMessage("Expression " + arg + " is not allowed.");
+                return true;
+            }
+        }
+
+        for (var arg : DISALLOWED_CHARACTER) {
+            if (commands.stream().anyMatch(arg::contains)) {
+                sender.sendMessage("Expression " + arg + " is not allowed.");
+                return true;
+            }
         }
 
         var scripts = new ProcessBuilder()
