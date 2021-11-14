@@ -1,3 +1,4 @@
 example:
   file: example.sh
   shell: sh
+  allowArgs: false

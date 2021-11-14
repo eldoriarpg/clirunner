@@ -14,6 +14,8 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -39,11 +41,19 @@ public class CliRun implements TabExecutor {
 
         var shell = section.getString("shell");
         var file = section.getString("file");
+        var allowArgs = section.getBoolean("allowArgs");
+
+        List<String> commands = new ArrayList<>();
+        commands.add(shell);
+        commands.add(file);
+        if (allowArgs && args.length > 1) {
+            commands.addAll(Arrays.stream(Arrays.copyOfRange(args,1, args.length)).toList());
+        }
 
         var scripts = new ProcessBuilder()
                 .directory(Path.of(plugin.getDataFolder().getAbsolutePath(), "scripts").toFile())
                 .redirectOutput(ProcessBuilder.Redirect.appendTo(log))
-                .command(shell, file);
+                .command(commands);
 
         try {
             scripts.start();

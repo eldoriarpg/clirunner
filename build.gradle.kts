@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.eldoria.clirunner"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -15,9 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc", "spigot-api", "1.16.5-R0.1-SNAPSHOT")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    compileOnly("org.spigotmc", "spigot-api", "1.13.2-R0.1-SNAPSHOT")
 }
 
 tasks.getByName<Test>("test") {
