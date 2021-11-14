@@ -6,4 +6,4 @@ api-version: 1.13
 commands:
   clirun:
     permission: clirunner.run
-    usage: /clirun <script>
+    usage: /clirun <script> [args...]
