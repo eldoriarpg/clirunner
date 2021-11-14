@@ -1,0 +1,9 @@
+name: CliRunner
+main: de.eldoria.clirunner.CliRunner
+version: 1.0
+api-version: 1.13
+
+commands:
+  clirun:
+    permission: clirunner.run
+    usage: /clirun <script>
