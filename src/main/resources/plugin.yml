@@ -1,6 +1,6 @@
 name: CliRunner
 main: de.eldoria.clirunner.CliRunner
-version: 1.0
+version: ${version}
 api-version: 1.13
 
 commands:
